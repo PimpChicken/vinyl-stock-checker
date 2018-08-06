@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="favicon.ico" rel="icon" type="image/x-icon" />
+    <title>Stock Checker</title>
+    <link rel="stylesheet" href="checker.css" />
+    <script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous">
+    </script>
+    <script src="dates.js" type="text/javascript"></script>
+    <script src="checker.min.js?version=2.3" type="text/javascript"></script>
+</head>
+<body>
+<h4>Note: Certain vendors use inconsistent naming standards, ex: if WRDUBS001 doesn't work, try WRDUBS01</h4>
+<h4>P.S.: Don't just type the name of a label (e.g.: BANDULU), you'll have a bad time.</h4>
+<h4>P.P.S: Wildcards (*) are not supported and for the most part will not work.</h4>
+<br/>
+<div style="margin: 0 auto; width: 400px;" id="inputArea">
+        Cat No.: <input type="text" name="catNo" id="catNo"> <input type="submit" value="Search" onclick="checkStock($('#catNo').val())">
+        <br/>
+        <br/>
+        <a onclick="selectAll()">Select All</a> |
+        <a onclick="selectNone()">Select None</a>
+        <table>
+            <tr>
+                <td><input checked type="checkbox" name="stores" id="redeye"><label for="redeye">RedEye</label></td>
+                <td><input checked type="checkbox" name="stores" id="whitepeach"><label for="whitepeach">White Peach</label></td>
+                <td><input checked type="checkbox" name="stores" id="unearthed"><label for="unearthed">Unearthed</label></td>
+            </tr>
+            <tr>
+                <td><input checked type="checkbox" name="stores" id="intense"><label for="intense">Intense</label></td>
+                <td><input checked type="checkbox" name="stores" id="kudos"><label for="kudos">Kudos</label></td>
+                <td><input checked type="checkbox" name="stores" id="deejay"><label for="deejay">Deejay.de</label></td>
+            </tr>
+            <tr>
+                <td><input checked type="checkbox" name="stores" id="boomkat"><label for="boomkat">Boomkat</label></td>
+                <td><input checked type="checkbox" name="stores" id="triplevision"><label for="triplevision">Triplevision</label></td>
+                <td><input checked type="checkbox" name="stores" id="rwdfwd"><label for="rwdfwd">RwdFwd</label></td>
+            </tr>
+            <tr>
+                <td><input checked type="checkbox" name="stores" id="scotchbonnet"><label for="scotchbonnet">Scotch Bonnet</label></td>
+                <td><input checked type="checkbox" name="stores" id="juno"><label for="juno">Juno</label></td>
+            </tr>
+        </table>
+</div>
+<br/>
+<br/>
+<div id="top5" style="margin:0 auto; width: 200px;">
+    Top Searches:
+    <br/>
+</div>
+<br/>
+<br/>
+<div id="loading" style="display: none; margin: 0 auto; width: 150px;">
+<img src="ajax-loader.gif" />
+</div>
+<div id="divReleases" style="display:none;">
+<br/>
+<table id="releases" class="responsive">
+    <caption>Releases</caption>
+    <thead>
+        <tr>
+            <th scope="col">Vendor</th>
+            <th scope="col">Release</th>
+            <th scope="col">Image</th>
+            <th scope="col">In Stock</th>
+            <th scope="col">Price</th>
+        </tr>
+    </thead>
+    <tbody id="body">
+    </tbody>
+</table>
+</div>
+<script type="text/javascript">
+$('#catNo').keydown(function (event) {
+    var keypressed = event.keyCode || event.which;
+    if (keypressed == 13) {
+        $('#catNo').val($('#catNo').val().toUpperCase());
+        checkStock($('#catNo').val());
+    }
+});
+</script>
+</body>
+</html>
