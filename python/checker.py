@@ -43,7 +43,7 @@ def request_redeye():
 
 @app.route("/redeyesearch")
 def request_redeye_search():
-	mariadb_connection = mariadb.connect(user='stock_user', password='rekkids_brah', database='stock_checker')
+	mariadb_connection = mariadb.connect(user='******', password='******', database='******')
 	cursor = mariadb_connection.cursor()
 
 	catNo = request.args.get('catNo')
